@@ -16,68 +16,6 @@
 get_header();
 
 
-
-	/**
-	 * Portfolio
-	 */
-
-	if ( class_exists( 'Jetpack_Portfolio' ) ) :
-
-		//Query setup
-			$portfolio = new WP_Query( apply_filters( 'wmhook_template_front_query_args_portfolio', array(
-					'post_type'           => 'jetpack-portfolio',
-					'posts_per_page'      => 6,
-					'paged'               => 1,
-					'ignore_sticky_posts' => true,
-				) ) );
-
-		//Loop
-			if ( $portfolio->have_posts() ) {
-
-			?>
-
-			<section class="potfolio-posts front-page-section">
-
-				<header class="page-header">
-
-					<h1 class="page-title"><?php echo apply_filters( 'wmhook_template_front_title_portfolio', '<a href="' . esc_url( get_post_type_archive_link( 'jetpack-portfolio' ) ) . '">' . __( 'Portfolio', 'wm_domain' ) . '</a>' ); ?></h1>
-
-				</header>
-
-				<?php
-
-				do_action( 'wmhook_template_front_portfolio_postslist_before' );
-
-				echo '<div class="posts posts-list clearfix"' . wm_schema_org( 'ItemList' ) . '>';
-
-					do_action( 'wmhook_template_front_portfolio_postslist_top' );
-
-					while ( $portfolio->have_posts() ) :
-
-						$portfolio->the_post();
-
-						get_template_part( 'content', get_post_format() );
-
-					endwhile;
-
-					do_action( 'wmhook_template_front_portfolio_postslist_bottom' );
-
-				echo '</div>';
-
-				do_action( 'wmhook_template_front_portfolio_postslist_after' );
-
-				?>
-
-			</section>
-
-			<?php
-
-			}
-
-	endif;
-
-
-
 	/**
 	 * Blog posts
 	 */
@@ -85,7 +23,7 @@ get_header();
 		//Query setup
 			$blog_posts = new WP_Query( apply_filters( 'wmhook_template_front_query_args_blog', array(
 					'post_type'           => 'post',
-					'posts_per_page'      => 6,
+					'posts_per_page'      => 3,
 					'paged'               => 1,
 					'ignore_sticky_posts' => true,
 				) ) );
@@ -102,7 +40,7 @@ get_header();
 					<h1 class="page-title"><?php
 
 						if ( $page_for_posts_id = absint( get_option( 'page_for_posts' ) ) ) {
-							echo apply_filters( 'wmhook_template_front_title_blog', '<a href="' . esc_url( get_permalink( $page_for_posts_id ) ) . '">' . __( 'Blog', 'wm_domain' ) . '</a>' );
+							echo apply_filters( 'wmhook_template_front_title_blog', '<a href="' . esc_url( get_permalink( $page_for_posts_id ) ) . '">' . __( 'News', 'wm_domain' ) . '</a>' );
 						} else {
 							echo apply_filters( 'wmhook_template_front_title_blog', __( 'Blog', 'wm_domain' ) );
 						}
@@ -140,6 +78,68 @@ get_header();
 			<?php
 
 			}
+
+
+
+	/**
+	 * Portfolio
+	 */
+
+	if ( class_exists( 'Jetpack_Portfolio' ) ) :
+
+		//Query setup
+			$portfolio = new WP_Query( apply_filters( 'wmhook_template_front_query_args_portfolio', array(
+					'post_type'           => 'jetpack-portfolio',
+					'posts_per_page'      => 3,
+					'paged'               => 1,
+					'ignore_sticky_posts' => true,
+				) ) );
+
+		//Loop
+			if ( $portfolio->have_posts() ) {
+
+			?>
+
+			<section class="potfolio-posts front-page-section">
+
+				<header class="page-header">
+
+					<h1 class="page-title"><?php echo apply_filters( 'wmhook_template_front_title_portfolio', '<a href="' . esc_url( get_post_type_archive_link( 'jetpack-portfolio' ) ) . '">' . __( 'Projects', 'wm_domain' ) . '</a>' ); ?></h1>
+
+				</header>
+
+				<?php
+
+				do_action( 'wmhook_template_front_portfolio_postslist_before' );
+
+				echo '<div class="posts posts-list clearfix"' . wm_schema_org( 'ItemList' ) . '>';
+
+					do_action( 'wmhook_template_front_portfolio_postslist_top' );
+
+					while ( $portfolio->have_posts() ) :
+
+						$portfolio->the_post();
+
+						get_template_part( 'content', get_post_format() );
+
+					endwhile;
+
+					do_action( 'wmhook_template_front_portfolio_postslist_bottom' );
+
+				echo '</div>';
+
+				do_action( 'wmhook_template_front_portfolio_postslist_after' );
+
+				?>
+
+			</section>
+
+			<?php
+
+			}
+
+	endif;
+
 
 
 
