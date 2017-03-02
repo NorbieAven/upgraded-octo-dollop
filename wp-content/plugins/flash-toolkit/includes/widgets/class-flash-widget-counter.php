@@ -29,7 +29,7 @@ class FT_Widget_Counter extends FT_Widget {
 		$this->widget_id          = 'themegrill_flash_counter';
 		$this->widget_name        = __( 'FT: Animated Number Counter', 'flash-toolkit' );
 		$this->control_ops        = array( 'width' => 400, 'height' => 350 );
-		$this->settings           = array(
+		$this->settings           = apply_filters( 'flash_toolkit_widget_settings_' . $this->widget_id, array(
 			'counter-title'  => array(
 				'type'  => 'text',
 				'std'   => '',
@@ -58,7 +58,7 @@ class FT_Widget_Counter extends FT_Widget {
 					'tg-fun-facts-layout-2' => __( 'Style 2', 'flash-toolkit' ),
 				)
 			),
-		);
+		) );
 
 		parent::__construct();
 
@@ -85,14 +85,10 @@ class FT_Widget_Counter extends FT_Widget {
 	 * @param array $instance
 	 */
 	public function widget( $args, $instance ) {
-		$text       = isset( $instance[ 'counter-title' ] ) ? $instance[ 'counter-title' ] : '';
-		$icon       = isset( $instance[ 'icon' ] ) ? $instance[ 'icon' ] : '';
-		$number     = isset( $instance[ 'number' ] ) ? $instance[ 'number' ] : '';
-		$style      = isset( $instance[ 'style' ] ) ? $instance[ 'style' ] : '';
 
 		$this->widget_start( $args, $instance );
 
-		flash_get_template( 'content-widget-counter.php', array( 'text' => $text, 'icon' => $icon, 'number' => $number, 'style' => $style ) );
+		flash_get_template( 'content-widget-counter.php', array( 'args' => $args, 'instance' => $instance ) );
 
 		$this->widget_end( $args );
 	}

@@ -1,8 +1,8 @@
 <?php
 /**
- * The template for displaying heading widget.
+ * The template for displaying service widget.
  *
- * This template can be overridden by copying it to yourtheme/flash-toolkit/content-widget-test.php.
+ * This template can be overridden by copying it to yourtheme/flash-toolkit/content-widget-service.php.
  *
  * HOWEVER, on occasion FlashToolkit will need to update template files and you
  * (the theme developer) will need to copy the new files to your theme to
@@ -19,7 +19,17 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+$title       = isset( $instance[ 'service-title' ] ) ? $instance[ 'service-title' ] : '';
+$icon_type   = isset( $instance[ 'icon_type' ] ) ? $instance[ 'icon_type' ] : 'icon';
+$icon        = isset( $instance[ 'icon' ] ) ? $instance[ 'icon' ] : '';
+$image       = isset( $instance[ 'image' ] ) ? $instance[ 'image' ] : '';
+$text        = isset( $instance[ 'text' ] ) ? $instance[ 'text' ] : '';
+$more_text   = isset( $instance[ 'more_text' ] ) ? $instance[ 'more_text' ] : '';
+$more_url    = isset( $instance[ 'more_url' ] ) ? $instance[ 'more_url' ] : '';
+$style       = isset( $instance[ 'style' ] ) ? $instance[ 'style' ] : '';
 ?>
+
 <div class="tg-service-widget <?php echo esc_attr( $style ); ?>">
 	<div class="service-wrapper">
 		<div class="service-icon-title-wrapper clearfix">

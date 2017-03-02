@@ -29,7 +29,7 @@ class FT_Widget_Blog extends FT_Widget {
 		$this->widget_id          = 'themegrill_flash_blog';
 		$this->widget_name        = __( 'FT: Blog', 'flash-toolkit' );
 		$this->control_ops        = array( 'width' => 400, 'height' => 350 );
-		$this->settings           = array(
+		$this->settings           = apply_filters( 'flash_toolkit_widget_settings_' . $this->widget_id, array(
 			'number'  => array(
 				'type'  => 'number',
 				'step'  => 1,
@@ -66,7 +66,7 @@ class FT_Widget_Blog extends FT_Widget {
 					'tg-blog-widget-layout-2' => __( 'Style 2', 'flash-toolkit' ),
 				)
 			),
-		);
+		) );
 
 		parent::__construct();
 	}
@@ -80,15 +80,10 @@ class FT_Widget_Blog extends FT_Widget {
 	 * @param array $instance
 	 */
 	public function widget( $args, $instance ) {
-		$number      = isset( $instance[ 'number' ] ) ? $instance[ 'number' ] : '';
-		$source      = isset( $instance[ 'source' ] ) ? $instance[ 'source' ] : '';
-		$category    = isset( $instance[ 'category' ] ) ? $instance[ 'category' ] : '';
-		$style       = isset( $instance[ 'style' ] ) ? $instance[ 'style' ] : '';
-
 
 		$this->widget_start( $args, $instance );
 
-		flash_get_template( 'content-widget-blog.php', array( 'number' => $number, 'source' => $source, 'category' => $category, 'style' => $style ) );
+		flash_get_template( 'content-widget-blog.php', array( 'instance' => $instance ) );
 
 		$this->widget_end( $args );
 	}

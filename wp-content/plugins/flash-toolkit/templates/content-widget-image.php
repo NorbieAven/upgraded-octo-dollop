@@ -1,8 +1,8 @@
 <?php
 /**
- * The template for displaying heading widget.
+ * The template for displaying image widget.
  *
- * This template can be overridden by copying it to yourtheme/flash-toolkit/content-widget-test.php.
+ * This template can be overridden by copying it to yourtheme/flash-toolkit/content-widget-image.php.
  *
  * HOWEVER, on occasion FlashToolkit will need to update template files and you
  * (the theme developer) will need to copy the new files to your theme to
@@ -20,8 +20,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+$image    = isset( $instance[ 'image' ] ) ? $instance[ 'image' ] : '';
+$link     = isset( $instance[ 'image_link' ] ) ? $instance[ 'image_link' ] : '';
+?>
+<?php
 if( !empty( $link ) ) { ?>
-	<a href="<?php echo esc_url( $link ); ?>><img src="<?php echo esc_url( $image ); ?>" /></a>
+	<a href="<?php echo esc_url( $link ); ?>"><img src="<?php echo esc_url( $image ); ?>" /></a>
 <?php } else { ?>
 	<img src="<?php echo esc_url( $image ); ?>" />
 <?php } ?>

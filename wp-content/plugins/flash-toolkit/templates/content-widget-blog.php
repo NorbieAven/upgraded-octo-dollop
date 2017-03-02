@@ -2,7 +2,7 @@
 /**
  * The template for displaying blog widget.
  *
- * This template can be overridden by copying it to yourtheme/flash-toolkit/content-widget-test.php.
+ * This template can be overridden by copying it to yourtheme/flash-toolkit/content-widget-blog.php.
  *
  * HOWEVER, on occasion FlashToolkit will need to update template files and you
  * (the theme developer) will need to copy the new files to your theme to
@@ -19,8 +19,12 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-?>
 
+$number      = isset( $instance[ 'number' ] ) ? $instance[ 'number' ] : '';
+$source      = isset( $instance[ 'source' ] ) ? $instance[ 'source' ] : '';
+$category    = isset( $instance[ 'category' ] ) ? $instance[ 'category' ] : '';
+$style       = isset( $instance[ 'style' ] ) ? $instance[ 'style' ] : '';
+?>
 <?php
 if($style == 'tg-blog-widget-layout-1' ) {
 	$image_size = 'flash-square';
@@ -63,7 +67,7 @@ $get_featured_posts = new WP_Query( array(
 			</figure>
 			<?php if($style == 'tg-blog-widget-layout-2' ) { ?>
 			<span class="entry-date">
-				<i class="fa fa-clock-o"></i><a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark"><?php echo esc_html ( get_the_modified_date() ); ?></a>
+				<i class="fa fa-clock-o"></i><a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark"><?php echo esc_html ( get_the_date() ); ?></a>
 			</span>
 			<?php } ?>
 		</div>
@@ -72,7 +76,7 @@ $get_featured_posts = new WP_Query( array(
 			<?php if($style == 'tg-blog-widget-layout-1' ) { ?>
 			<div class="entry-meta">
 				<span class="entry-date">
-					<i class="fa fa-clock-o"></i><a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark"><?php echo esc_html ( get_the_modified_date() ); ?></a>
+					<i class="fa fa-clock-o"></i><a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark"><?php echo esc_html ( get_the_date() ); ?></a>
 				</span>
 				<span class="entry-author">
 					<i class="fa fa-user"></i><a class="url fn n" href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>"><?php echo esc_html( get_the_author() ); ?></a>

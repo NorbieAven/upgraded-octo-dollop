@@ -29,7 +29,7 @@ class FT_Widget_CTA extends FT_Widget {
 		$this->widget_id          = 'themegrill_flash_cta';
 		$this->widget_name        = __( 'FT: CTA', 'flash-toolkit' );
 		$this->control_ops        = array( 'width' => 400, 'height' => 350 );
-		$this->settings           = array(
+		$this->settings           = apply_filters( 'flash_toolkit_widget_settings_' . $this->widget_id, array(
 			'cta-title'  => array(
 				'type'  => 'text',
 				'std'   => '',
@@ -69,7 +69,7 @@ class FT_Widget_CTA extends FT_Widget {
 					'call-to-action-section-layout-2' => __( 'Style 2', 'flash-toolkit' ),
 				)
 			)
-		);
+		) );
 
 		parent::__construct();
 	}
@@ -83,17 +83,10 @@ class FT_Widget_CTA extends FT_Widget {
 	 * @param array $instance
 	 */
 	public function widget( $args, $instance ) {
-		$title       = isset( $instance[ 'cta-title' ] ) ? $instance[ 'cta-title' ] : '';
-		$subtitle    = isset( $instance[ 'cta-subtitle' ] ) ? $instance[ 'cta-subtitle' ] : '';
-		$btn1        = isset( $instance[ 'cta-btn1' ] ) ? $instance[ 'cta-btn1' ] : '';
-		$btn1_link   = isset( $instance[ 'cta-btn1-link' ] ) ? $instance[ 'cta-btn1-link' ] : '';
-		$btn2        = isset( $instance[ 'cta-btn2' ] ) ? $instance[ 'cta-btn2' ] : '';
-		$btn2_link   = isset( $instance[ 'cta-btn2-link' ] ) ? $instance[ 'cta-btn2-link' ] : '';
-		$style       = isset( $instance[ 'style' ] ) ? $instance[ 'style' ] : 'tg-cta-layout-1';
 
 		$this->widget_start( $args, $instance );
 
-		flash_get_template( 'content-widget-cta.php', array( 'title' => $title,  'subtitle' => $subtitle, 'btn1' => $btn1, 'btn1_link' => $btn1_link, 'btn2' => $btn2, 'btn2_link' => $btn2_link, 'style' => $style ) );
+		flash_get_template( 'content-widget-cta.php', array( 'args' => $args, 'instance' => $instance ) );
 
 		$this->widget_end( $args );
 	}

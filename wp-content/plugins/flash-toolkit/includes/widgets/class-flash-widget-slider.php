@@ -29,7 +29,7 @@ class FT_Widget_Slider extends FT_Widget {
 		$this->widget_id          = 'themegrill_flash_slider';
 		$this->widget_name        = __( 'FT: Slider', 'flash-toolkit' );
 		$this->control_ops        = array( 'width' => 400, 'height' => 350 );
-		$this->settings           = array(
+		$this->settings           = apply_filters( 'flash_toolkit_widget_settings_' . $this->widget_id, array(
 			'repeatable_slider' => array(
 				'type'   => 'repeater',
 				'label'  => __( 'Sortable Sliders', 'flash-toolkit' ),
@@ -98,7 +98,12 @@ class FT_Widget_Slider extends FT_Widget {
 					'slider-control-bottom-right'    => __( 'Bottom Right Align', 'flash-toolkit' ),
 				)
 			),
-		);
+			'full-screen' => array(
+				'type'  => 'checkbox',
+				'std'   => '',
+				'label' => __( 'Check to make slide full screen.', 'flash-toolkit' ),
+			),
+		) );
 
 		parent::__construct();
 
@@ -125,14 +130,10 @@ class FT_Widget_Slider extends FT_Widget {
 	 * @param array $instance
 	 */
 	public function widget( $args, $instance ) {
-		$color             = isset( $instance['color'] ) ? $instance['color'] : 'slider-dark';
-		$align             = isset( $instance['align'] ) ? $instance['align'] : 'slider-content-center';
-		$controls          = isset( $instance['controls'] ) ? $instance['controls'] : 'slider-control-center';
-		$repeatable_slider = isset( $instance['repeatable_slider'] ) ? $instance['repeatable_slider'] : array();
 
 		$this->widget_start( $args, $instance );
 
-		flash_get_template( 'content-widget-slider.php', array( 'color' => $color, 'align' => $align, 'controls' => $controls, 'repeatable_slider' => $repeatable_slider ) );
+		flash_get_template( 'content-widget-slider.php', array( 'args' => $args, 'instance' => $instance ) );
 
 		$this->widget_end( $args );
 	}

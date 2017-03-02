@@ -2,7 +2,7 @@
 /**
  * The template for displaying logo widget entries
  *
- * This template can be overridden by copying it to yourtheme/flash-toolkit/content-widget-test.php.
+ * This template can be overridden by copying it to yourtheme/flash-toolkit/content-widget-logo.php.
  *
  * HOWEVER, on occasion FlashToolkit will need to update template files and you
  * (the theme developer) will need to copy the new files to your theme to
@@ -19,21 +19,22 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-?>
 
+$repeatable_logo = isset( $instance['repeatable_logo'] ) ? $instance['repeatable_logo'] : array();
+?>
 <div class="tg-client-widget">
 	<div class="client-container swiper-container">
 		<div class="client-wrapper swiper-wrapper">
-<?php
-foreach ($repeatable_logo as $logo) {
-	if( $logo['image'] != '' ) { ?>
-	<div class="client-slide swiper-slide">
-		<img src="<?php echo $logo['image']; ?>" alt="<?php echo $logo['title']; ?>" />
-	</div>
-	<?php
-	}
-}
-?>
+		<?php
+		foreach ($repeatable_logo as $logo) {
+			if( $logo['image'] != '' ) { ?>
+			<div class="client-slide swiper-slide">
+				<img src="<?php echo $logo['image']; ?>" alt="<?php echo $logo['title']; ?>" />
+			</div>
+			<?php
+			}
+		}
+		?>
 		</div>
 	</div>
 </div>

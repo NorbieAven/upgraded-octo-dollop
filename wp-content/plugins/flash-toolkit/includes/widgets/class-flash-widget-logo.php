@@ -29,12 +29,7 @@ class FT_Widget_Logo extends FT_Widget {
 		$this->widget_id          = 'themegrill_flash_logo';
 		$this->widget_name        = __( 'FT: Logo', 'flash-toolkit' );
 		$this->control_ops        = array( 'width' => 400, 'height' => 350 );
-		$this->settings           = array(
-			'title'  => array(
-				'type'  => 'text',
-				'std'   => '',
-				'label' => __( 'Title', 'flash-toolkit' ),
-			),
+		$this->settings           = apply_filters( 'flash_toolkit_widget_settings_' . $this->widget_id, array(
 			'repeatable_logo' => array(
 				'type'   => 'repeater',
 				'label'  => __( 'Sortable Logos', 'flash-toolkit' ),
@@ -63,7 +58,7 @@ class FT_Widget_Logo extends FT_Widget {
 					),
 				),
 			),
-		);
+		) );
 
 		parent::__construct();
 
@@ -90,11 +85,10 @@ class FT_Widget_Logo extends FT_Widget {
 	 * @param array $instance
 	 */
 	public function widget( $args, $instance ) {
-		$repeatable_logo = isset( $instance['repeatable_logo'] ) ? $instance['repeatable_logo'] : array();
 
 		$this->widget_start( $args, $instance );
 
-		flash_get_template( 'content-widget-logo.php', array( 'repeatable_logo' => $repeatable_logo ) );
+		flash_get_template( 'content-widget-logo.php', array( 'args' => $args, 'instance' => $instance ) );
 
 		$this->widget_end( $args );
 	}

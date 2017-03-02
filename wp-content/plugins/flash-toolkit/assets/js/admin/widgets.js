@@ -77,6 +77,32 @@ jQuery( function ( $ ) {
 			}
 		}).change();
 
+		$( 'select.media_chooser' ).change( function() {
+			if ( $( this ).val() === 'image' ) {
+				$( this ).closest( '.widget-content' ).find( '.show_if_image' ).show();
+				$( this ).closest( '.widget-content' ).find( '.show_if_video' ).closest( 'p' ).hide();
+			} else {
+				$( this ).closest( '.widget-content' ).find( '.show_if_image' ).hide();
+				$( this ).closest( '.widget-content' ).find( '.show_if_video' ).closest( 'p' ).show();
+			}
+		}).change();
+
+		$( 'select.filter_availability' ).change( function() {
+			if ( $( this ).val() === '0' ) {
+				$( this ).closest( '.widget-content' ).find( '.show_if_all_category' ).closest( 'p' ).show();
+			} else {
+				$( this ).closest( '.widget-content' ).find( '.show_if_all_category' ).closest( 'p' ).hide();
+			}
+		}).change();
+
+		$( 'select.availability' ).change( function() {
+			if ( $( this ).val() === 'latest' ) {
+				$( this ).closest( 'p' ).next( 'p' ).hide();
+			} else {
+				$( this ).closest( 'p' ).next( 'p' ).show();
+			}
+		}).change();
+
 		$( 'input.availability' ).change( function() {
 			if ( $( this ).is( ':checked' ) ) {
 				$( this ).closest( 'p' ).next( 'p' ).hide();

@@ -29,10 +29,11 @@ class FT_Widget_Portfolio extends FT_Widget {
 		$this->widget_id          = 'themegrill_flash_portfolio';
 		$this->widget_name        = __( 'FT: Portfolio', 'flash-toolkit' );
 		$this->control_ops        = array( 'width' => 400, 'height' => 350 );
-		$this->settings           = array(
+		$this->settings           = apply_filters( 'flash_toolkit_widget_settings_' . $this->widget_id, array(
 			'categories'  => array(
 				'type'  => 'select_categories',
 				'std'   => '',
+				'class' => 'filter_availability',
 				'label' => __( 'Select Project Category', 'flash-toolkit' ),
 				'args'  => array(
 					'hide_empty'       => 0,
@@ -52,6 +53,7 @@ class FT_Widget_Portfolio extends FT_Widget {
 			'filter' => array(
 				'type'  => 'checkbox',
 				'std'   => 0,
+				'class' => 'show_if_all_category',
 				'label' => __( 'Show navigation filter.', 'flash-toolkit' ),
 			),
 			'style' => array(
@@ -73,7 +75,7 @@ class FT_Widget_Portfolio extends FT_Widget {
 					'tg-column-4' => __( '4 Column', 'flash-toolkit' ),
 				)
 			),
-		);
+		) );
 
 		parent::__construct();
 
@@ -99,15 +101,10 @@ class FT_Widget_Portfolio extends FT_Widget {
 	 * @param array $instance
 	 */
 	public function widget( $args, $instance ) {
-		$categories    = isset( $instance[ 'categories' ] ) ? $instance[ 'categories' ] : '';
-		$number        = isset( $instance[ 'number' ] ) ? $instance[ 'number' ] : '';
-		$filter        = empty( $instance[ 'filter' ] ) ? 0 : 1;
-		$style         = isset( $instance[ 'style' ] ) ? $instance[ 'style' ] : 'tg-feature-product-layout-1';
-		$column        = isset( $instance[ 'column' ] ) ? $instance[ 'column' ] : 'tg-column-3';
 
 		$this->widget_start( $args, $instance );
 
-		flash_get_template( 'content-widget-portfolio.php', array( 'categories' => $categories, 'number' => $number, 'filter' => $filter, 'style' => $style, 'column' => $column ) );
+		flash_get_template( 'content-widget-portfolio.php', array( 'instance' => $instance ) );
 
 		$this->widget_end( $args );
 	}

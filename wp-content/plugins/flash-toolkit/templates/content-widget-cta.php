@@ -2,7 +2,7 @@
 /**
  * The template for displaying cta widget.
  *
- * This template can be overridden by copying it to yourtheme/flash-toolkit/content-widget-test.php.
+ * This template can be overridden by copying it to yourtheme/flash-toolkit/content-widget-cta.php.
  *
  * HOWEVER, on occasion FlashToolkit will need to update template files and you
  * (the theme developer) will need to copy the new files to your theme to
@@ -19,6 +19,14 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+$title       = isset( $instance[ 'cta-title' ] ) ? $instance[ 'cta-title' ] : '';
+$subtitle    = isset( $instance[ 'cta-subtitle' ] ) ? $instance[ 'cta-subtitle' ] : '';
+$btn1        = isset( $instance[ 'cta-btn1' ] ) ? $instance[ 'cta-btn1' ] : '';
+$btn1_link   = isset( $instance[ 'cta-btn1-link' ] ) ? $instance[ 'cta-btn1-link' ] : '';
+$btn2        = isset( $instance[ 'cta-btn2' ] ) ? $instance[ 'cta-btn2' ] : '';
+$btn2_link   = isset( $instance[ 'cta-btn2-link' ] ) ? $instance[ 'cta-btn2-link' ] : '';
+$style       = isset( $instance[ 'style' ] ) ? $instance[ 'style' ] : 'tg-cta-layout-1';
 ?>
 <div class="cta-wrapper <?php echo esc_attr( $style ); ?>">
 	<div class="section-title-wrapper">

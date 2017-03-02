@@ -29,7 +29,7 @@ class FT_Widget_About extends FT_Widget {
 		$this->widget_id          = 'themegrill_flash_about';
 		$this->widget_name        = __( 'FT: About', 'flash-toolkit' );
 		$this->control_ops        = array( 'width' => 400, 'height' => 350 );
-		$this->settings           = array(
+		$this->settings           = apply_filters( 'flash_toolkit_widget_settings_' . $this->widget_id, array(
 			'about-title'  => array(
 				'type'  => 'text',
 				'std'   => '',
@@ -52,10 +52,11 @@ class FT_Widget_About extends FT_Widget {
 			),
 			'image' => array(
 				'type'  => 'image',
+				'class' => 'show_if_image',
 				'std'   => '',
 				'label' => __( 'Image', 'flash-toolkit' )
 			),
-		);
+		) );
 
 		parent::__construct();
 	}
@@ -69,16 +70,10 @@ class FT_Widget_About extends FT_Widget {
 	 * @param array $instance
 	 */
 	public function widget( $args, $instance ) {
-		$title       = isset( $instance[ 'about-title' ] ) ? $instance[ 'about-title' ] : '';
-		$text        = isset( $instance[ 'text' ] ) ? $instance[ 'text' ] : '';
-		$more_text   = isset( $instance[ 'more_text' ] ) ? $instance[ 'more_text' ] : '';
-		$more_url    = isset( $instance[ 'more_url' ] ) ? $instance[ 'more_url' ] : '';
-		$image       = isset( $instance[ 'image' ] ) ? $instance[ 'image' ] : '';
-
 
 		$this->widget_start( $args, $instance );
 
-		flash_get_template( 'content-widget-about.php', array( 'title' => $title, 'text' => $text, 'more_text' => $more_text, 'more_url' => $more_url, 'image' => $image ) );
+		flash_get_template( 'content-widget-about.php', array( 'args' => $args, 'instance' => $instance ) );
 
 		$this->widget_end( $args );
 	}

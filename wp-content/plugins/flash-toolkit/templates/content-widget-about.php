@@ -2,7 +2,7 @@
 /**
  * The template for displaying about widget.
  *
- * This template can be overridden by copying it to yourtheme/flash-toolkit/content-widget-test.php.
+ * This template can be overridden by copying it to yourtheme/flash-toolkit/content-widget-about.php.
  *
  * HOWEVER, on occasion FlashToolkit will need to update template files and you
  * (the theme developer) will need to copy the new files to your theme to
@@ -19,8 +19,12 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+$title       = isset( $instance[ 'about-title' ] ) ? $instance[ 'about-title' ] : '';
+$text        = isset( $instance[ 'text' ] ) ? $instance[ 'text' ] : '';
+$more_text   = isset( $instance[ 'more_text' ] ) ? $instance[ 'more_text' ] : '';
+$more_url    = isset( $instance[ 'more_url' ] ) ? $instance[ 'more_url' ] : '';
+$image       = isset( $instance[ 'image' ] ) ? $instance[ 'image' ] : '';
 ?>
-
 <div class="tg-column-wrapper">
 	<div class="about-content-wrapper tg-column-2">
 		<?php if( !empty( $title ) ) { ?>

@@ -29,7 +29,7 @@ class FT_Widget_Service extends FT_Widget {
 		$this->widget_id          = 'themegrill_flash_service';
 		$this->widget_name        = __( 'FT: Service', 'flash-toolkit' );
 		$this->control_ops        = array( 'width' => 400, 'height' => 350 );
-		$this->settings           = array(
+		$this->settings           = apply_filters( 'flash_toolkit_widget_settings_' . $this->widget_id, array(
 			'service-title'  => array(
 				'type'  => 'text',
 				'std'   => '',
@@ -82,7 +82,7 @@ class FT_Widget_Service extends FT_Widget {
 					'tg-service-layout-2' => __( 'Style 2', 'flash-toolkit' ),
 				)
 			),
-		);
+		) );
 
 		parent::__construct();
 	}
@@ -96,18 +96,10 @@ class FT_Widget_Service extends FT_Widget {
 	 * @param array $instance
 	 */
 	public function widget( $args, $instance ) {
-		$title       = isset( $instance[ 'service-title' ] ) ? $instance[ 'service-title' ] : '';
-		$icon_type   = isset( $instance[ 'icon_type' ] ) ? $instance[ 'icon_type' ] : 'icon';
-		$icon        = isset( $instance[ 'icon' ] ) ? $instance[ 'icon' ] : '';
-		$image       = isset( $instance[ 'image' ] ) ? $instance[ 'image' ] : '';
-		$text        = isset( $instance[ 'text' ] ) ? $instance[ 'text' ] : '';
-		$more_text   = isset( $instance[ 'more_text' ] ) ? $instance[ 'more_text' ] : '';
-		$more_url    = isset( $instance[ 'more_url' ] ) ? $instance[ 'more_url' ] : '';
-		$style       = isset( $instance[ 'style' ] ) ? $instance[ 'style' ] : '';
 
 		$this->widget_start( $args, $instance );
 
-		flash_get_template( 'content-widget-service.php', array( 'title' => $title, 'icon_type' => $icon_type, 'icon' => $icon, 'image' => $image, 'text' => $text, 'more_text' => $more_text, 'more_url' => $more_url, 'style' => $style ) );
+		flash_get_template( 'content-widget-service.php', array( 'args' => $args, 'instance' => $instance ) );
 
 		$this->widget_end( $args );
 	}

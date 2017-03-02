@@ -29,7 +29,7 @@ class FT_Widget_Team extends FT_Widget {
 		$this->widget_id          = 'themegrill_flash_team';
 		$this->widget_name        = __( 'FT: Team', 'flash-toolkit' );
 		$this->control_ops        = array( 'width' => 400, 'height' => 350 );
-		$this->settings           = array(
+		$this->settings           = apply_filters( 'flash_toolkit_widget_settings_' . $this->widget_id, array(
 			'team-title'  => array(
 				'type'  => 'text',
 				'std'   => '',
@@ -75,7 +75,7 @@ class FT_Widget_Team extends FT_Widget {
 					'tg-team-layout-3' => __( 'Style 3', 'flash-toolkit' )
 				)
 			),
-		);
+		) );
 
 		parent::__construct();
 	}
@@ -89,18 +89,10 @@ class FT_Widget_Team extends FT_Widget {
 	 * @param array $instance
 	 */
 	public function widget( $args, $instance ) {
-		$title       = isset( $instance[ 'team-title' ] ) ? $instance[ 'team-title' ] : '';
-		$image       = isset( $instance[ 'image' ] ) ? $instance[ 'image' ] : '';
-		$text        = isset( $instance[ 'text' ] ) ? $instance[ 'text' ] : '';
-		$designation = isset( $instance[ 'designation' ] ) ? $instance[ 'designation' ] : '';
-		$facebook    = isset( $instance[ 'facebook' ] ) ? $instance[ 'facebook' ] : '';
-		$twitter     = isset( $instance[ 'twitter' ] ) ? $instance[ 'twitter' ] : '';
-		$linkedin    = isset( $instance[ 'linkedin' ] ) ? $instance[ 'linkedin' ] : '';
-		$style       = isset( $instance[ 'style' ] ) ? $instance[ 'style' ] : '';
 
 		$this->widget_start( $args, $instance );
 
-		flash_get_template( 'content-widget-team.php', array( 'name' => $title,  'image' => $image, 'text' => $text, 'designation' => $designation, 'facebook' => $facebook, 'twitter' => $twitter, 'linkedin' => $linkedin, 'style' => $style ) );
+		flash_get_template( 'content-widget-team.php', array( 'args' => $args, 'instance' => $instance ) );
 
 		$this->widget_end( $args );
 	}
